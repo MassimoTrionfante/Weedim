@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>WEEDIM - Web Midi Maker</title>
+<link rel="stylesheet" type="text/css" href="weedim.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<!-- Banner -->
+<span class="banner">
+<span class="elBanner"><img alt="banner" src="img/banner.png" width=400 height=150></span>
+<span class="elBanner">
+<br>
+<b>Author:</b> Massimo Trionfante<br>
+<b>Mail:</b> massimo.trionfante@gmail.com<br>
+<b>Facebook:</b> lol no<br>
+<b>Twitter:</b> no<br>
+<b>Github:</b> not yet<br>
+<b>Donate:</b> <a href="donate">CLICK ME</a><br>
+</span>
+</span>
+
+
+<!-- BARRA IN ALTO -->
+<span class="barraSuperiore">
+
+<!-- Menu' tendina -->
+<span class="menuTendina">
+<!-- ...e i vari elementi interni -->
+<span class="elemMT">File</span>
+<span class="elemMT">Project</span>
+<span class="elemMT">Help</span>
+</span>
+
+<!-- Menu' con info del progetto -->
+<span class="menuInfo">
+<!-- ...e i vari elementi interni -->
+<span class="elemMI">MASTER VOLUME:<span class="elInput" id="vol">180</span></span><span class="elemMI">TEMPO:<span class="elInput" id="tem">120</span></span>
+</span>
+</span>
+
+<!-- BARRA LATERALE SINISTRA, contiene tutti i canali -->
+<span class="barraLaterale">
+
+<span class="rigaBarraLaterale">
+<span class="canaleAttivo">&#8226;</span>
+<span class="canaleLaterale">Piano</span>
+
+<span style="visibility:hidden">
+<span class="fa fa-edit"></span>
+<span class="fa fa-trash"></span>
+</span>
+
+</span>
+
+<span class="rigaBarraLaterale">
+<span class="canaleDisattivo">&#8226;</span>
+<span class="canaleLaterale">Percussione</span>
+</span>
+
+<span class="rigaBarraLaterale">
+<span class="canaleDaAggiungere">&#8226;</span>
+<span class="canaleLateraleAggiungi">Add channel...</span>
+</span>
+
+</span>
+
+<!-- CORPO PRINCIPALE, dove puoi piazzare le note -->
+<span class="corpoPrincipale">
+
+<span class="lineaSedicesima" style="margin-left:30px;"></span>
+<span class="lineaSedicesima" style="margin-left:60px;"></span>
+<span class="lineaSedicesima" style="margin-left:90px;"></span>
+<span class="lineaSedicesima" style="margin-left:120px;"></span>
+<span class="lineaSedicesima" style="margin-left:150px;"></span>
+<span class="lineaSedicesima" style="margin-left:180px;"></span>
+<span class="lineaSedicesima" style="margin-left:210px;"></span>
+<span class="lineaSedicesima" style="margin-left:1070px;"></span>
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="separatoreOttave"></span>
+
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">B3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">A+3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">A3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">G+3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">G3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">F+3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">F3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">E3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">D+3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">D3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">C+3</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">C3</span></span>
+
+<span class="separatoreOttave"></span>
+
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">B2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">A+2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">A2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">G+2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">G2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">F+2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">F2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">E2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">D+2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">D2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">C+2</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">C2</span></span>
+
+<span class="separatoreOttave"></span>
+
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">B1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">A+1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">A1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">G+1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">G1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">F+1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">F1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">E1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">D+1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">D1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">C+1</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">C1</span></span>
+
+</span>
+
+
+
+</body>
+</html>
