@@ -121,7 +121,7 @@ background-color: #050530;
 width: 80%;
 height: 65%;
 overflow: auto;
-
+resize: both;
 }
 
 .lineaNota {
@@ -134,7 +134,7 @@ display: block;
 width: 30px;
 position: absolute;
 display: block;
-height: 1661px;
+height: 1690px;
 overflow: auto;
 border-right: 1px solid #303070;
 }
@@ -162,6 +162,7 @@ color: #A0A0FF;
 text-align: center;
 width: 30px;
 }
+
 
 .rigaBarraLaterale {
 display: block;
