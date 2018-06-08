@@ -2,22 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>WEEDIM - Web Midi Maker</title>
-<link rel="stylesheet" type="text/css" href="weedim.css">
+<link rel="stylesheet" type="text/css" href={{url_for('static',filename="weedim.css")}}>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 <!-- Banner -->
 <span class="banner">
-<span class="elBanner"><img alt="banner" src="img/banner.png" width=400 height=150></span>
+<span class="elBanner"><img alt="banner" src={{url_for('static',filename="img/banner.png")}} width=400 height=150></span>
 <span class="elBanner">
 <br>
 <b>Author:</b> Massimo Trionfante<br>
 <b>Mail:</b> massimo.trionfante@gmail.com<br>
-<b>Facebook:</b> lol no<br>
-<b>Twitter:</b> no<br>
-<b>Github:</b> not yet<br>
-<b>Donate:</b> <a href="donate">CLICK ME</a><br>
+<b>Github:</b> <a href="https://github.com/MassimoTrionfante">https://github.com/MassimoTrionfante</a><br>
 </span>
 </span>
 
@@ -69,71 +66,34 @@
 <!-- CORPO PRINCIPALE, dove puoi piazzare le note -->
 <span class="corpoPrincipale">
 
-<span class="lineaSedicesima" style="margin-left:30px;"></span>
-<span class="lineaSedicesima" style="margin-left:60px;"></span>
-<span class="lineaSedicesima" style="margin-left:90px;"></span>
-<span class="lineaSedicesima" style="margin-left:120px;"></span>
-<span class="lineaSedicesima" style="margin-left:150px;"></span>
-<span class="lineaSedicesima" style="margin-left:180px;"></span>
-<span class="lineaSedicesima" style="margin-left:210px;"></span>
-<span class="lineaSedicesima" style="margin-left:1070px;"></span>
+{% set i = 1 %}
+{% for i in range(1,999) %}
+{% set j = i*30 %}
+<span class="lineaSedicesima" style="margin-left:{{j}}px;"></span>
+{% if i%4 == 0 %}
+<span class="lineaSedicesima" style="margin-left:{{j+1}}px;"></span>
+{% endif %}
+{% endfor %}
 
-
-
-
-
-
-
-
-
-
-
-
+{% set j = 0 %}
+{% for j in range(0,7) %}
+{% set i = 7-j %}
 <span class="separatoreOttave"></span>
 
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">B3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">A+3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">A3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">G+3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">G3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">F+3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">F3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">E3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">D+3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">D3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">C+3</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">C3</span></span>
-
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">B{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">A+{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">A{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">G+{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">G{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">F+{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">F{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">E{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">D+{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">D{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleB">C+{{i}}</span></span>
+<span class="lineaNota"><span class="notaCorpoPrincipaleW">C{{i}}</span></span>
+{% endfor %}
 <span class="separatoreOttave"></span>
-
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">B2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">A+2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">A2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">G+2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">G2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">F+2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">F2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">E2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">D+2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">D2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">C+2</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">C2</span></span>
-
-<span class="separatoreOttave"></span>
-
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">B1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">A+1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">A1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">G+1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">G1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">F+1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">F1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">E1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">D+1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">D1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleB">C+1</span></span>
-<span class="lineaNota"><span class="notaCorpoPrincipaleW">C1</span></span>
-
 </span>
 
 

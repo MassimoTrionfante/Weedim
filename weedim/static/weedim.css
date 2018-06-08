@@ -126,6 +126,7 @@ overflow: auto;
 
 .lineaNota {
 border-bottom: 1px solid #303070;
+width: 99999px;
 display: block;
 }
 
@@ -133,12 +134,14 @@ display: block;
 width: 30px;
 position: absolute;
 display: block;
-height: 999999px;
+height: 1661px;
+overflow: auto;
 border-right: 1px solid #303070;
 }
 
 .separatoreOttave {
 border: 1px solid #303070;
+width: 99999px;
 display: block;
 }
 
