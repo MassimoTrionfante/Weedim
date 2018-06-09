@@ -31,6 +31,20 @@ MIDI.loadPlugin({
 var mouseDown = 0; // 0 = not clicking; 1 = left click;
 var blockAdd = 0; // Set to 1 if you're moving a note
 
+//DEBUG DEBUG DEBUG DEBUG DEBUG
+function getMouseX(event)
+{ 
+  var a = document.getElementById("corpoPrincipale");
+  //document.getElementById("debugX").innerHTML = a.scrollLeft + event.clientX;
+}
+function getMouseY(event)
+{
+  var a = document.getElementById("corpoPrincipale");
+  //document.getElementById("debugY").innerHTML = a.scrollTop + event.clientY;
+}
+//DEBUG DEBUG DEBUG
+
+
 document.oncontextmenu = function() { return false; } // Disable right-click menu
 
 // Play note at the click of the piano notes on the side
@@ -78,7 +92,56 @@ function addNote(noteSheet,event)
   {
     // ...add new note!
     var nuovaNota = document.createElement("span");
-    nuovaNota.innerHTML = "note";
+    var pitch = event.clientY + noteSheet.scrollTop;
+    var scarto = 0;
+
+    // Calculate note value (scarto + diff(19) - 4)
+    for (var i=0;i<7;i++)
+    {
+      if (pitch > (scarto + 210 + 200*i) && pitch <= (scarto + 230 + 200*i)  )
+      {
+        nuovaNota.innerHTML = "B" + (7-i);
+        nuovaNota.id = 11 + 12*(7 - (i));
+        MIDI.noteOn(0,nuovaNota.id,127,0);
+      }
+      else if (pitch > (scarto + 230 + 200*i) && pitch <= (scarto + 245 + 200*i) )
+      {
+        nuovaNota.innerHTML = "A+" + (7-i);
+        nuovaNota.id = 10 + 12*(7 - (i));
+        MIDI.noteOn(0,nuovaNota.id,127,0);
+      }
+      else if (pitch > (scarto + 245 + 200*i) && pitch <= (scarto + 260 + 200*i) )
+      {
+        nuovaNota.innerHTML = "A" + (7-i);
+        nuovaNota.id = 9 + 12*(7 - (i));
+        MIDI.noteOn(0,nuovaNota.id,127,0);
+      }
+      else if (pitch > (scarto + 260 + 200*i) && pitch <= (scarto + 276 + 200*i) )
+      {
+        nuovaNota.innerHTML = "G+" + (7-i);
+        nuovaNota.id = 8 + 12*(7 - (i));
+        MIDI.noteOn(0,nuovaNota.id,127,0);
+      }
+       else if (pitch > (scarto + 276 + 200*i) && pitch <= (scarto + 291 + 200*i) )
+      {
+        nuovaNota.innerHTML = "G" + (7-i);
+        nuovaNota.id = 7 + 12*(7 - (i));
+        MIDI.noteOn(0,nuovaNota.id,127,0);
+      }
+        else if (pitch > (scarto + 291 + 200*i) && pitch <= (scarto + 316 + 200*i) )
+      {
+        nuovaNota.innerHTML = "F+" + (7-i);
+        nuovaNota.id = 6 + 12*(7 - (i));
+        MIDI.noteOn(0,nuovaNota.id,127,0);
+      }
+      
+
+
+
+
+      scarto = scarto + 6;
+    }
+    //nuovaNota.innerHTML = "note";
     nuovaNota.setAttribute("onmousemove","javascript: moveNote(this,event)");
     nuovaNota.setAttribute("onmousedown","javascript: setMouseDown(this,event)");
     nuovaNota.setAttribute("onmouseup","javascript: setMouseUp()");
