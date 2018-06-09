@@ -147,8 +147,8 @@ overflow: auto;
 border: 1px solid #101040;
 position: absolute;
 background-color: #050530;
-width: 80%;
-height: 65%;
+width: 1080px;
+height: 720px;
 overflow: auto;
 resize: both;
 }
@@ -157,14 +157,22 @@ resize: both;
 border-bottom: 1px solid #303070;
 width: 99999px;
 display: block;
+height: 30px;
+position: static;
+z-index: 2;
+}
+
+.lineaNota:hover {
+background-color: blue;
 }
 
 .lineaSedicesima {
 width: 30px;
 position: absolute;
 display: block;
-height: 1690px;
-overflow: auto;
+height: 9999px;
+max-height: 2620px;
+overflow: hidden;
 border-right: 1px solid #303070;
 }
 
@@ -176,6 +184,7 @@ display: block;
 
 .notaCorpoPrincipaleW {
 z-index: 4;
+vertical-align: middle;
 position: relative;
 border: 1px solid #303070;
 background-color: #A0A0FF;
@@ -183,19 +192,21 @@ display: block;
 color: #000040;
 text-align: center;
 width: 30px;
+height: 30px;
 }
 
 .notaCorpoPrincipaleB {
 z-index: 4;
+vertical-align: middle;
 position: relative;
 border: 1px solid #303070;
 background-color: #000040;
-display: block;
+display: inline-block;
 color: #A0A0FF;
 text-align: center;
 width: 30px;
+height: 30px;
 }
-
 
 .rigaBarraLaterale {
 display: block;
@@ -253,10 +264,12 @@ cursor: move;
 z-index: 3;
 padding: 2px 2px;
 display: block;
-background-color: red;
+background-color: #404090;
 position: absolute;
-height: 13px;
-width: 113px;
-border: 1px solid white;
+height: 23px;
+width: 112px;
+text-align: center;
+border: 1px solid #8080FF;
+color: #8080FF;
 border-radius: 5px;
 }

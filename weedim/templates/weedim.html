@@ -56,10 +56,11 @@ DEBUG <span id="debugX">000</span> <span id="debugY">000</span>
 
 <!-- Menu' con info del progetto -->
 <span class="menuInfo">
-<!-- ...e i vari elementi interni -->
-<span class="elemMI">MASTER VOLUME:<span class="elInput" id="vol">180</span></span>
-<span class="elemMI">NOTE LENGTH:<span class="elInput" id="tem">4th</span></span>
-</span>
+<!-- ...e i vari elementi interni (span class elemMI)-->
+<span class="elemMI">WEEDIM</span>
+<span class="elemMI">Note length:</span>
+<span class="elemMI"><span class="fa fa-play"></span></span>
+<span class="elemMI"><span class="fa fa-undo"></span></span>
 </span>
 
 <!-- BARRA LATERALE SINISTRA, contiene tutti i canali -->
@@ -89,7 +90,7 @@ DEBUG <span id="debugX">000</span> <span id="debugY">000</span>
 </span>
 
 <!-- CORPO PRINCIPALE, dove puoi piazzare le note -->
-<span id="corpoPrincipale" class="corpoPrincipale" onmousedown="addNote(this,event)">
+<span id="corpoPrincipale" class="corpoPrincipale">
 <!-- Appendi le note qui! -->
 <!--<span class="nota"
 onmousemove="moveNote(this,event)"
@@ -120,7 +121,7 @@ NOTE LENGTHS->WIDTH INFO!!
   {% set nota = 12*i %}
 <span class="separatoreOttave"></span>
 
-<span class="lineaNota"><span id={{nota+11}} onclick="playNote(this)" class="notaCorpoPrincipaleW">B{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+11}} onclick="playNote(this); addNote(event)" class="notaCorpoPrincipaleW">B{{i}}</span></span>
 <span class="lineaNota"><span id={{nota+10}} onclick="playNote(this)" class="notaCorpoPrincipaleB">A+{{i}}</span></span>
 <span class="lineaNota"><span id={{nota+9}} onclick="playNote(this)" class="notaCorpoPrincipaleW">A{{i}}</span></span>
 <span class="lineaNota"><span id={{nota+8}} onclick="playNote(this)" class="notaCorpoPrincipaleB">G+{{i}}</span></span>
@@ -133,8 +134,6 @@ NOTE LENGTHS->WIDTH INFO!!
 <span class="lineaNota"><span id={{nota+1}} onclick="playNote(this)" class="notaCorpoPrincipaleB">C+{{i}}</span></span>
 <span class="lineaNota"><span id={{nota}} onclick="playNote(this)" class="notaCorpoPrincipaleW">C{{i}}</span></span>
 {% endfor %}
-  <span class="separatoreOttave"></span>
-
 </span>
 
 </body>

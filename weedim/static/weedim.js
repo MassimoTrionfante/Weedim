@@ -24,6 +24,22 @@ MIDI.loadPlugin({
    // MIDI.noteOff(0, 55, delay + 0.90);
    // MIDI.noteOff(0, 55, delay + 1.10);
 
+// Star Wars Theme
+// notes list
+//var notes = [48,55,53,52,50,60,55,53,52,50,60,55,53,52,53,50];
+// delay. Watch out: you have to count an extra beginning number
+//var delays = [1, 1, 1, 0.2, 0.2, 0.2, 1, 0.5, 0.2, 0.2, 0.2, 1, 0.5, 0.2, 0.2, 0.2];
+//var i=0;
+//var delay =0;
+//for (i=0;i<notes.length;i++)
+//{
+//  delay = delay + delays[i];
+//  MIDI.noteOn(0, notes[i], velocity, delay);
+//  MIDI.noteOff(0, notes[i], delay + 1);
+//}
+
+
+
   }
   });
 };
@@ -42,7 +58,7 @@ function getMouseY(event)
   var a = document.getElementById("corpoPrincipale");
   //document.getElementById("debugY").innerHTML = a.scrollTop + event.clientY;
 }
-//DEBUG DEBUG DEBUG
+//DEBUG DEBUG DEBUG ---------------------------------------------------------
 
 
 document.oncontextmenu = function() { return false; } // Disable right-click menu
@@ -84,71 +100,15 @@ function moveNote(elemento,event)
 }
 // -------------------------
 
-// Function that adds a note on the notes sheet
-function addNote(noteSheet,event)
+// Function that adds a note on the notes sheet by pressing the piano buttons
+function addNote()
 {
-  // If you're clicking down + aren't moving a note + not outside sheet...
-  if (event.button == 0 && blockAdd == 0 && event.clientX > 231)
-  {
-    // ...add new note!
-    var nuovaNota = document.createElement("span");
-    var pitch = event.clientY + noteSheet.scrollTop;
-    var scarto = 0;
-
-    // Calculate note value (scarto + diff(19) - 4)
-    for (var i=0;i<7;i++)
-    {
-      if (pitch > (scarto + 210 + 200*i) && pitch <= (scarto + 230 + 200*i)  )
-      {
-        nuovaNota.innerHTML = "B" + (7-i);
-        nuovaNota.id = 11 + 12*(7 - (i));
-        MIDI.noteOn(0,nuovaNota.id,127,0);
-      }
-      else if (pitch > (scarto + 230 + 200*i) && pitch <= (scarto + 245 + 200*i) )
-      {
-        nuovaNota.innerHTML = "A+" + (7-i);
-        nuovaNota.id = 10 + 12*(7 - (i));
-        MIDI.noteOn(0,nuovaNota.id,127,0);
-      }
-      else if (pitch > (scarto + 245 + 200*i) && pitch <= (scarto + 260 + 200*i) )
-      {
-        nuovaNota.innerHTML = "A" + (7-i);
-        nuovaNota.id = 9 + 12*(7 - (i));
-        MIDI.noteOn(0,nuovaNota.id,127,0);
-      }
-      else if (pitch > (scarto + 260 + 200*i) && pitch <= (scarto + 276 + 200*i) )
-      {
-        nuovaNota.innerHTML = "G+" + (7-i);
-        nuovaNota.id = 8 + 12*(7 - (i));
-        MIDI.noteOn(0,nuovaNota.id,127,0);
-      }
-       else if (pitch > (scarto + 276 + 200*i) && pitch <= (scarto + 291 + 200*i) )
-      {
-        nuovaNota.innerHTML = "G" + (7-i);
-        nuovaNota.id = 7 + 12*(7 - (i));
-        MIDI.noteOn(0,nuovaNota.id,127,0);
-      }
-        else if (pitch > (scarto + 291 + 200*i) && pitch <= (scarto + 316 + 200*i) )
-      {
-        nuovaNota.innerHTML = "F+" + (7-i);
-        nuovaNota.id = 6 + 12*(7 - (i));
-        MIDI.noteOn(0,nuovaNota.id,127,0);
-      }
-      
-
-
-
-
-      scarto = scarto + 6;
-    }
-    //nuovaNota.innerHTML = "note";
-    nuovaNota.setAttribute("onmousemove","javascript: moveNote(this,event)");
-    nuovaNota.setAttribute("onmousedown","javascript: setMouseDown(this,event)");
-    nuovaNota.setAttribute("onmouseup","javascript: setMouseUp()");
-    nuovaNota.className = "nota";
-    nuovaNota.style.top = (event.clientY + noteSheet.scrollTop - 215) + "px";
-    nuovaNota.style.left = (event.clientX + noteSheet.scrollLeft - 200) + "px";
-    noteSheet.appendChild(nuovaNota);
-  }
+  var noteSheet = document.getElementById("corpoPrincipale");
+  var nuovaNota = document.createElement("span");
+  nuovaNota.className = "nota";
+  nuovaNota.innerHTML = "nota";
+  nuovaNota.style.top = 2 + "px";
+  nuovaNota.style.left = 32 + "px";
+  noteSheet.appendChild(nuovaNota);
 }
 
