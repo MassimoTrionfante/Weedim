@@ -38,7 +38,6 @@
 <b>Author:</b> Massimo Trionfante<br>
 <b>Mail:</b> massimo.trionfante@gmail.com<br>
 <b>Github:</b> <a href="https://github.com/MassimoTrionfante">https://github.com/MassimoTrionfante</a><br>
-DEBUG <span id="debugX">000</span> <span id="debugY">000</span>
 </span>
 </span>
 
@@ -57,37 +56,40 @@ DEBUG <span id="debugX">000</span> <span id="debugY">000</span>
 <!-- Menu' con info del progetto -->
 <span class="menuInfo">
 <!-- ...e i vari elementi interni (span class elemMI)-->
-<span class="elemMI">WEEDIM</span>
-<span class="elemMI">Note length:</span>
-<span class="elemMI"><span class="fa fa-play"></span></span>
-<span class="elemMI"><span class="fa fa-undo"></span></span>
+<span class="elemMI">Note length:
+   <span id=1 style="color:#F080A0; cursor:pointer;" class="fa fa-minus-circle" onclick="changeLength(this)"></span>
+     <span id="noteLength" class="elemMIIn">4</span>th
+   <span id=2 style="color:#80F0A0; cursor:pointer;" class="fa fa-plus-circle" onclick="changeLength(this)"></span>
 </span>
+<span class="elemMI">Play <span class="fa fa-play" style="color:#80F0A0; cursor:pointer" onclick="playMusic()"></span> </span>
+<span class="elemMI">Undo <span class="fa fa-undo" style="color:#F080A0; cursor:pointer" onclick="doUndo()"></span> </span>
+<span class="elemMI">Chording <span id="enableChord" class="elemMIIn" onclick="enableChording(this)">OFF</span> </span>
+<span class="elemMI">Add rest <span id=0 class="fa fa-cube" style="color:#F080A0;cursor:pointer" onclick="addNote(this,event)"></span> </span>
+</span>
+
+
 
 <!-- BARRA LATERALE SINISTRA, contiene tutti i canali -->
+<!--
 <span class="barraLaterale">
-
-<span class="rigaBarraLaterale">
-<span class="canaleAttivo">&#8226;</span>
-<span class="canaleLaterale">Piano</span>
-
-<span style="visibility:hidden">
-<span class="fa fa-edit"></span>
-<span class="fa fa-trash"></span>
+  <span class="rigaBarraLaterale">
+  <span class="canaleAttivo">&#8226;</span>
+  <span class="canaleLaterale">Piano</span>
+  <span style="visibility:hidden">
+  <span class="fa fa-edit"></span>
+  <span class="fa fa-trash"></span>
+  </span>
+  </span>
+  <span class="rigaBarraLaterale">
+  <span class="canaleDisattivo">&#8226;</span>
+  <span class="canaleLaterale">Percussione</span>
+  </span>
+  <span class="rigaBarraLaterale">
+  <span class="canaleDaAggiungere">&#8226;</span>
+  <span class="canaleLateraleAggiungi">Add channel...</span>
+  </span>
 </span>
-
-</span>
-
-<span class="rigaBarraLaterale">
-<span class="canaleDisattivo">&#8226;</span>
-<span class="canaleLaterale">Percussione</span>
-</span>
-
-<span class="rigaBarraLaterale">
-<span class="canaleDaAggiungere">&#8226;</span>
-<span class="canaleLateraleAggiungi">Add channel...</span>
-</span>
-
-</span>
+-->
 
 <!-- CORPO PRINCIPALE, dove puoi piazzare le note -->
 <span id="corpoPrincipale" class="corpoPrincipale">
@@ -121,18 +123,18 @@ NOTE LENGTHS->WIDTH INFO!!
   {% set nota = 12*i %}
 <span class="separatoreOttave"></span>
 
-<span class="lineaNota"><span id={{nota+11}} onclick="playNote(this); addNote(event)" class="notaCorpoPrincipaleW">B{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+10}} onclick="playNote(this)" class="notaCorpoPrincipaleB">A+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+9}} onclick="playNote(this)" class="notaCorpoPrincipaleW">A{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+8}} onclick="playNote(this)" class="notaCorpoPrincipaleB">G+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+7}} onclick="playNote(this)" class="notaCorpoPrincipaleW">G{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+6}} onclick="playNote(this)" class="notaCorpoPrincipaleB">F+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+5}} onclick="playNote(this)" class="notaCorpoPrincipaleW">F{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+4}} onclick="playNote(this)" class="notaCorpoPrincipaleW">E{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+3}} onclick="playNote(this)" class="notaCorpoPrincipaleB">D+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+2}} onclick="playNote(this)" class="notaCorpoPrincipaleW">D{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+1}} onclick="playNote(this)" class="notaCorpoPrincipaleB">C+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota}} onclick="playNote(this)" class="notaCorpoPrincipaleW">C{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+11}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">B{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+10}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">A+{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+9}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">A{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+8}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">G+{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+7}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">G{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+6}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">F+{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+5}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">F{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+4}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">E{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+3}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">D+{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+2}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">D{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+1}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">C+{{i}}</span></span>
+<span class="lineaNota"><span id={{nota}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">C{{i}}</span></span>
 {% endfor %}
 </span>
 

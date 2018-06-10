@@ -131,6 +131,11 @@ padding: 3px;
 border-right: 4px dotted #101050;
 }
 
+.elemMIIn {
+color: #8080F0;
+cursor: pointer;
+}
+
 .barraLaterale {
 border: 2px solid #101040;
 position: static;
@@ -260,16 +265,35 @@ text-shadow: 1px 0 #202020, 0 1px #202020, -1px 0 #202020, 0 -1px #202020;
 }
 
 .nota {
+font-size: 10px;
 cursor: move;
 z-index: 3;
 padding: 2px 2px;
 display: block;
 background-color: #404090;
 position: absolute;
-height: 23px;
+height: 24px;
 width: 112px;
 text-align: center;
 border: 1px solid #8080FF;
 color: #8080FF;
 border-radius: 5px;
 }
+
+.rest {
+font-size: 10px;
+opacity: 0.5;
+cursor: move;
+z-index: 3;
+padding: 2px 2px;
+display: block;
+position: absolute;
+height: 2615px;
+width: 112px;
+text-align: center;
+background-color: #FF80A0;
+border: 1px dotted #A0A0FF;
+color: #A0A0FF;
+background-image: url("img/tile1.png");
+}
+
