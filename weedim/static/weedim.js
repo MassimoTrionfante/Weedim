@@ -221,3 +221,4 @@ function doUndo()
   // Nuke last note's gfx
   notaDaCanc.remove();
 }
+

@@ -153,7 +153,7 @@ border: 1px solid #101040;
 position: absolute;
 background-color: #050530;
 width: 1080px;
-height: 720px;
+height: 400px;
 overflow: auto;
 resize: both;
 }
@@ -265,19 +265,23 @@ text-shadow: 1px 0 #202020, 0 1px #202020, -1px 0 #202020, 0 -1px #202020;
 }
 
 .nota {
-font-size: 10px;
+font-size: 13px;
 cursor: move;
 z-index: 3;
 padding: 2px 2px;
 display: block;
-background-color: #404090;
+background: linear-gradient(to bottom right,#E080FF,#501070);
 position: absolute;
 height: 24px;
 width: 112px;
 text-align: center;
-border: 1px solid #8080FF;
-color: #8080FF;
+border-top: 1px solid #FFA0FF;
+border-left: 1px solid #FFA0FF;
+border-bottom: 1px solid #300060;
+border-right: 1px solid #300060;
+color: #FFFFFF;
 border-radius: 5px;
+text-shadow: 1px 0 #000000, 0 1px #000000, -1px 0 #000000, 0 -1px #000000;
 }
 
 .rest {
@@ -296,4 +300,5 @@ border: 1px dotted #A0A0FF;
 color: #A0A0FF;
 background-image: url("img/tile1.png");
 }
+
 
