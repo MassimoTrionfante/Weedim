@@ -41,7 +41,7 @@ MIDI.loadPlugin({
   });
 };
 
-document.oncontextmenu = function() { return false; } // Disable right-click menu
+//document.oncontextmenu = function() { return false; } // Disable right-click menu
 
 // GLOBAL VARIABLES
 var music = [0]; // here we store all the notes of the music
@@ -221,4 +221,18 @@ function doUndo()
   }
   // Nuke last note's gfx
   notaDaCanc.remove();
+}
+
+function getMidi(){
+
+  var arrasdi = [0x50,0x43,0x22];
+  var mioFile = document.createElement('a');
+
+  mioFile.setAttribute('href', 'data:audio/mid;charset=utf-8,' + String.fromCharCode(arrasdi[0]));
+  mioFile.setAttribute('download', "Midi.mid");
+  mioFile.style.display = "none";
+  document.body.appendChild(mioFile);
+  mioFile.click();
+  mioFile.remove();
+
 }

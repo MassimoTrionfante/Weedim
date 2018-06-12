@@ -48,7 +48,7 @@
 <!-- Menu' tendina -->
 <span class="menuTendina">
 <!-- ...e i vari elementi interni -->
-<span id="dwn-btn" class="elemMT">Export .mid</span>
+<span class="elemMT" onclick="getMidi()">Export .mid</span>
 <span class="elemMT">Help</span>
 </span>
 
@@ -136,6 +136,7 @@ NOTE LENGTHS->WIDTH INFO!!
 <span class="lineaNota"><span id={{nota}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">C{{i}}</span></span>
 {% endfor %}
 </span>
+
 
 </body>
 </html>
