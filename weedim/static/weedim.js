@@ -46,6 +46,7 @@ document.oncontextmenu = function() { return false; } // Disable right-click men
 // GLOBAL VARIABLES
 var music = [0]; // here we store all the notes of the music
 var lengths = [0,0]; // here we store all the lengths (used as delay in MIDI.noteOn)
+                     // Note that an extra value is needed for Midi.js to playback properly
 var numOfNotes = 0; // how many notes out channel has
 var whereNextNote = 32; // where to place next note horizontally
 var chordEnabled = 0; // says if added note is a chord
@@ -221,4 +222,3 @@ function doUndo()
   // Nuke last note's gfx
   notaDaCanc.remove();
 }
-
