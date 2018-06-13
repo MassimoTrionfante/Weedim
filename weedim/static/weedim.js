@@ -19,40 +19,21 @@ MIDI.loadPlugin({
     MIDI.noteOn(0, 57+12, velocity, 0.60);
     MIDI.noteOn(0, 59+12, velocity, 0.70);
     MIDI.noteOn(0, 60+12, velocity, 0.80);
-   // MIDI.noteOff(0, 55, delay + 0.70);
-   // MIDI.noteOff(0, 55, delay + 0.80);
-   // MIDI.noteOff(0, 55, delay + 0.90);
-   // MIDI.noteOff(0, 55, delay + 1.10);
-
-// Star Wars Theme
-// notes list
-//var notes = [48,55,53,52,50,60,55,53,52,50,60,55,53,52,53,50];
-// delay. Watch out: you have to count an extra beginning number
-//var delays = [1, 1, 1, 0.2, 0.2, 0.2, 1, 0.5, 0.2, 0.2, 0.2, 1, 0.5, 0.2, 0.2, 0.2];
-//var i=0;
-//var delay =0;
-//for (i=0;i<notes.length;i++)
-//{
-//  delay = delay + delays[i];
-//  MIDI.noteOn(0, notes[i], velocity, delay);
-//  MIDI.noteOff(0, notes[i], delay + 1);
-//}
   }
   });
 };
 
-//document.oncontextmenu = function() { return false; } // Disable right-click menu
+document.oncontextmenu = function() { return false; } // Disable right-click menu
 
 // GLOBAL VARIABLES
-
 
 var music = [0]; // here we store all the notes of the music
 var lengths = [0,0]; // here we store all the lengths (used as delay in MIDI.noteOn)
                      // Note that an extra value is needed for Midi.js to playback properly
 var numOfNotes = 0; // how many notes out channel has
 var whereNextNote = 32; // where to place next note horizontally
-var chordEnabled = 0; // says if added note is a chord
 var lastAddedLength = 0; // used for chording, remembers last length (graphically)
+var isRec = 0; // Tells if it's in rec. mode
 
 // Play note at the click of the piano notes on the side
 function playNote(elemento)
@@ -65,84 +46,66 @@ function playNote(elemento)
 // Function that adds a note on the notes sheet by pressing the piano buttons
 function addNote(nota, event)
 {
-  var noteSheet = document.getElementById("corpoPrincipale");
-  var nuovaNota = document.createElement("span");
-  var noteLength = document.getElementById("noteLength").innerHTML;
+  if(isRec){
 
-  // Show the note graphically
-  if (nota.id==0)
-  {
-    nuovaNota.className = "rest";
-    nuovaNota.style.top = 0;
-  }
-  else
-  {
-    nuovaNota.className = "nota";
-    nuovaNota.style.top = nota.offsetTop  + "px";
-    nuovaNota.innerHTML = nota.innerHTML;
-  }
-  nuovaNota.id = nota.id;
-  nuovaNota.name = noteLength;
-  nuovaNota.setAttribute("onclick","javascript: playNote(this)");
-  nuovaNota.style.left = whereNextNote + "px";
+    var noteSheet = document.getElementById("corpoPrincipale");
+    var nuovaNota = document.createElement("span");
+    var noteLength = document.getElementById("noteLength").innerHTML;
 
-  // Calculate note length graphically
-  if (noteLength == 1)
-  {
-    nuovaNota.style.width = 472 + "px";
-    if (!chordEnabled)
-    { whereNextNote += 472 + 8; }
+    // Show the note graphically
+    if (nota.id==0)
+    {
+      nuovaNota.className = "rest";
+      nuovaNota.style.top = 0;
+    }
     else
-    { lastAddedLength = 472 + 8; }
-  }
-  else if (noteLength == 2)
-  {
-    nuovaNota.style.width = 232 + "px";
-    if (!chordEnabled)
-    { whereNextNote += 232 + 8; }
-    else
-    { lastAddedLength = 232 + 8; }
-  }
-  else if (noteLength == 4)
-  {
-    nuovaNota.style.width = 112 + "px";
-    if (!chordEnabled)
-    { whereNextNote += 112 + 8; }
-    else
-    { lastAddedLength = 112 + 8; }
-  }
-  else if (noteLength == 8)
-  {
-    nuovaNota.style.width = 52 + "px";
-    if (!chordEnabled)
-    { whereNextNote += 52 + 8; }
-    else
-    { lastAddedLength = 52 + 8; }
-  }
-  else if (noteLength == 16)
-  {
-    nuovaNota.style.width = 22 + "px";
-    if (!chordEnabled)
-    { whereNextNote += 22 + 8; }
-    else
-    { lastAddedLength = 22 + 8; }
-  }
+    {
+      nuovaNota.className = "nota";
+      nuovaNota.style.top = nota.offsetTop  + "px";
+      nuovaNota.innerHTML = nota.innerHTML;
+    }
+    nuovaNota.id = nota.id;
+    nuovaNota.name = noteLength;
+    nuovaNota.setAttribute("onclick","javascript: playNote(this)");
+    nuovaNota.style.left = whereNextNote + "px";
 
-  // Finally, append new note in body
-  noteSheet.appendChild(nuovaNota);
+    // Calculate note length graphically
+    if (noteLength == 1)
+    {
+      nuovaNota.style.width = 472 + "px";
+      whereNextNote += 472 + 8 ;
+    }
+    else if (noteLength == 2)
+    {
+      nuovaNota.style.width = 232 + "px";
+      whereNextNote += 232 + 8;
+    }
+    else if (noteLength == 4)
+    {
+      nuovaNota.style.width = 112 + "px";
+      whereNextNote += 112 + 8;
+    }
+    else if (noteLength == 8)
+    {
+      nuovaNota.style.width = 52 + "px";
+      whereNextNote += 52 + 8;
+    }
+    else if (noteLength == 16)
+    {
+      nuovaNota.style.width = 22 + "px";
+      whereNextNote += 22 + 8;
+    }
 
-  // Put the music values in out global arrays
-  music.push(nota.id)  //music.push(nota.id); // Add note
-  if (chordEnabled)
-  {
-    lengths.push(0); // If chording is enabled, no pause happens
-  }
-  else
-  {
+    // Finally, append new note in body
+    noteSheet.appendChild(nuovaNota);
+
+    // Put the music values in out global arrays
+    music.push(nota.id)  //music.push(nota.id); // Add note
+      
     lengths.push(32/noteLength); // Add length
-  }
   
-  numOfNotes++; // Increase note counter
+    numOfNotes++; // Increase note counter
+  }
 }
 
 // Small function that changes length of inputted notes
@@ -160,22 +123,6 @@ function changeLength(elem)
   }
 }
 
-// Function that toggles chording
-function enableChording(toggle)
-{
-  if (toggle.innerHTML == "OFF")
-  {
-    toggle.innerHTML = "ON";
-    chordEnabled = 1;
-  }
-  else
-  {
-    toggle.innerHTML = "OFF";
-    chordEnabled = 0;
-    whereNextNote += lastAddedLength;
-  }
-}
-
 // Function that plays the song inside the sheet
 function playMusic()
 {
@@ -184,7 +131,7 @@ function playMusic()
   var totalDelay= 0.0;
   for (i=0;i<music.length;i++)
   {
-    delay = parseFloat( (lengths[i])/16 );
+    delay = parseFloat( (lengths[i])/16 ) ;
     totalDelay = totalDelay + delay;
     MIDI.noteOn(0, parseInt(music[i]), 127, totalDelay );
     MIDI.noteOff(0, parseInt(music[i]), totalDelay + 1);
@@ -225,6 +172,31 @@ function doUndo()
   notaDaCanc.remove();
 }
 
+// Function that toggles REC. value
+function toggleRec(elem)
+{
+  if (isRec) // It's in rec. mode?
+  {
+    isRec = 0; //...then disable it
+    elem.style.color = "#4040A0";
+  }
+  else // Else enable rec
+  {
+    isRec = 1;
+    elem.style.color = "#F04080";
+  }
+}
+
+// Function that explains how site works shortly
+function showHelp()
+{
+  alert("Welcome to Weedim, your trusted Web Midi Maker!\n\nUse the piano on your left to play notes.\nYou can record a sequence by pressing on the \"Rec\" circle. Pressing it will toggle between a free mode, and the recording mode.\nOnce you recorded something, you can play the result by clicking the \"Play\" button.\nPress on the red minus circle or on the green plus circle to change the recorded notes length: lengths vary from 16th (the shortest) to 1th (the longest).\nIf you need to record a pause between notes, simply click on the \"Add rest\" box.\nLastly, you can remove the last recorded note or rest by clicking on the red \"Undo\" arrow.\n\nEnjoy your time!\n- Massimo Trionfante ");
+
+}
+
+
+// Unused function that enabled midi exporting. I abandoned the idea after facing too many issues
+/*
 function getMidi(){
 
   var arrasdi = [0x50,0x43,0x22];
@@ -237,4 +209,4 @@ function getMidi(){
   mioFile.click();
   mioFile.remove();
 
-}
+}*/

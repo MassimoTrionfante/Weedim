@@ -48,8 +48,7 @@
 <!-- Menu' tendina -->
 <span class="menuTendina">
 <!-- ...e i vari elementi interni -->
-<span class="elemMT" onclick="getMidi()">Export .mid</span>
-<span class="elemMT">Help</span>
+<span class="elemMT" onclick="showHelp()">Help</span>
 </span>
 
 <!-- Menu' con info del progetto -->
@@ -62,33 +61,10 @@
 </span>
 <span class="elemMI">Play <span class="fa fa-play" style="color:#80F0A0; cursor:pointer" onclick="playMusic()"></span> </span>
 <span class="elemMI">Undo <span class="fa fa-undo" style="color:#F080A0; cursor:pointer" onclick="doUndo()"></span> </span>
-<span class="elemMI">Chording <span id="enableChord" class="elemMIIn" onclick="enableChording(this)">OFF</span> </span>
 <span class="elemMI">Add rest <span id=0 class="fa fa-cube" style="color:#F080A0;cursor:pointer" onclick="addNote(this,event)"></span> </span>
+<span class="elemMI">REC. <span class="fa fa-dot-circle-o" style="cursor:pointer;color:#4040A0" onclick="toggleRec(this)"  > </span> </span>
 </span>
 
-
-
-<!-- BARRA LATERALE SINISTRA, contiene tutti i canali -->
-<!--
-<span class="barraLaterale">
-  <span class="rigaBarraLaterale">
-  <span class="canaleAttivo">&#8226;</span>
-  <span class="canaleLaterale">Piano</span>
-  <span style="visibility:hidden">
-  <span class="fa fa-edit"></span>
-  <span class="fa fa-trash"></span>
-  </span>
-  </span>
-  <span class="rigaBarraLaterale">
-  <span class="canaleDisattivo">&#8226;</span>
-  <span class="canaleLaterale">Percussione</span>
-  </span>
-  <span class="rigaBarraLaterale">
-  <span class="canaleDaAggiungere">&#8226;</span>
-  <span class="canaleLateraleAggiungi">Add channel...</span>
-  </span>
-</span>
--->
 
 <!-- CORPO PRINCIPALE, dove puoi piazzare le note -->
 <span id="corpoPrincipale" class="corpoPrincipale">
