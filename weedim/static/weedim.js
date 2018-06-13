@@ -44,6 +44,8 @@ MIDI.loadPlugin({
 //document.oncontextmenu = function() { return false; } // Disable right-click menu
 
 // GLOBAL VARIABLES
+
+
 var music = [0]; // here we store all the notes of the music
 var lengths = [0,0]; // here we store all the lengths (used as delay in MIDI.noteOn)
                      // Note that an extra value is needed for Midi.js to playback properly
@@ -130,7 +132,7 @@ function addNote(nota, event)
   noteSheet.appendChild(nuovaNota);
 
   // Put the music values in out global arrays
-  music.push(nota.id); // Add note
+  music.push(nota.id)  //music.push(nota.id); // Add note
   if (chordEnabled)
   {
     lengths.push(0); // If chording is enabled, no pause happens
