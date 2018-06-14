@@ -26,9 +26,5 @@ def create_app(test_config=None):
     def mainPage():
         return render_template('weedim.html')
 
-    @app.route('/getMidi')
-    def getMidi():
-        return "0"
-
     return app
 

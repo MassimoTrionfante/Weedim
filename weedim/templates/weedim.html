@@ -24,10 +24,11 @@
 
 </head>
 <body>
-<!-- Loading screen che và via al caricamento del soundfont -->
+<!-- Loading screen -->
 <span class="loadingScreen" id="loadclear">
 <span id="loading" class="fa fa-refresh"></span>
-<span class="loadingwrite">Loading Soundfont...</span>
+<span class="loadingwrite">Loading Soundfont...</span><br>
+<span class="loadinglong">It's taking longer than expected.<br>If the loading persists, try again later, or check your internet connection.</span>
 </span>
 
 <!-- Banner -->
@@ -54,7 +55,7 @@
 <!-- Menu' con info del progetto -->
 <span class="menuInfo">
 <!-- ...e i vari elementi interni (span class elemMI)-->
-<span class="elemMI">Note length:
+<span class="elemMI">Length:
    <span id=1 style="color:#F080A0; cursor:pointer;" class="fa fa-minus-circle" onclick="changeLength(this)"></span>
      <span id="noteLength" class="elemMIIn">4</span>th
    <span id=2 style="color:#80F0A0; cursor:pointer;" class="fa fa-plus-circle" onclick="changeLength(this)"></span>
@@ -62,7 +63,8 @@
 <span class="elemMI">Play <span class="fa fa-play" style="color:#80F0A0; cursor:pointer" onclick="playMusic()"></span> </span>
 <span class="elemMI">Undo <span class="fa fa-undo" style="color:#F080A0; cursor:pointer" onclick="doUndo()"></span> </span>
 <span class="elemMI">Add rest <span id=0 class="fa fa-cube" style="color:#F080A0;cursor:pointer" onclick="addNote(this,event)"></span> </span>
-<span class="elemMI">REC. <span class="fa fa-dot-circle-o" style="cursor:pointer;color:#4040A0" onclick="toggleRec(this)"  > </span> </span>
+<span class="elemMI">REC. <span class="fa fa-dot-circle-o" style="cursor:pointer;color:#4040A0" onclick="toggleRec(this)"> </span> </span>
+<span class="elemMI">Delete <span class="fa fa-trash" style="color:#F080A0;cursor:pointer" onclick="nuclearNuke()"></span>  </span>
 </span>
 
 
@@ -83,7 +85,7 @@ NOTE LENGTHS->WIDTH INFO!!
 -->
 
 {% set i = 1 %}
-{% for i in range(1,999) %}
+{% for i in range(1,1300) %}
 {% set j = i*30 %}
 <span class="lineaSedicesima" style="margin-left:{{j}}px;"></span>
 {% if i%4 == 0 %}
@@ -93,23 +95,45 @@ NOTE LENGTHS->WIDTH INFO!!
 
 {% set j = 0 %}
 {% set nota = 12 %}
-{% for j in range(0,7) %}
+{% for j in range(0,6) %}
   {% set i = 7-j %}
   {% set nota = 12*i %}
 <span class="separatoreOttave"></span>
 
-<span class="lineaNota"><span id={{nota+11}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">B{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+10}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">A+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+9}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">A{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+8}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">G+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+7}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">G{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+6}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">F+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+5}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">F{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+4}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">E{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+3}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">D+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+2}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">D{{i}}</span></span>
-<span class="lineaNota"><span id={{nota+1}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleB">C+{{i}}</span></span>
-<span class="lineaNota"><span id={{nota}} onclick="playNote(this); addNote(this, event)" class="notaCorpoPrincipaleW">C{{i}}</span></span>
+<span class="lineaNota"><span id={{nota+11}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">B{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+10}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleB">A+{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+9}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">A{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+8}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleB">G+{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+7}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">G{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+6}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleB">F+{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+5}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">F{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+4}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">E{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+3}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleB">D+{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+2}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">D{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota+1}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleB">C+{{i-1}}</span></span>
+<span class="lineaNota"><span id={{nota}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">C{{i-1}}</span></span>
+{% endfor %}
+</span>
+
+<!-- Horizontal piano goes here  -->
+<span class="pianoBox">
+
+{% set j = 0 %}
+{% set nota = 12 %}
+{% for j in range(1,7) %}
+  {% set nota = 12*(j+1) %}
+<span class="notaPianoW" id={{nota}} onclick="playNote(this); addNote(this,event, 1)" >C{{j}}</span>
+<span class="notaPianoB" id={{nota+1}} onclick="playNote(this); addNote(this,event, 1)" >C+{{j}}</span>
+<span class="notaPianoW" id={{nota+2}} onclick="playNote(this); addNote(this,event, 1)" >D{{j}}</span>
+<span class="notaPianoB" id={{nota+3}} onclick="playNote(this); addNote(this,event, 1)" >D+{{j}}</span>
+<span class="notaPianoW" id={{nota+4}} onclick="playNote(this); addNote(this,event, 1)" >E{{j}}</span>
+<span class="notaPianoW" id={{nota+5}} onclick="playNote(this); addNote(this,event, 1)" >F{{j}}</span>
+<span class="notaPianoB" id={{nota+6}} onclick="playNote(this); addNote(this,event, 1)" >F+{{j}}</span>
+<span class="notaPianoW" id={{nota+7}} onclick="playNote(this); addNote(this,event, 1)" >G{{j}}</span>
+<span class="notaPianoB" id={{nota+8}} onclick="playNote(this); addNote(this,event, 1)" >G+{{j}}</span>
+<span class="notaPianoW" id={{nota+9}} onclick="playNote(this); addNote(this,event, 1)" >A{{j}}</span>
+<span class="notaPianoB" id={{nota+10}} onclick="playNote(this); addNote(this,event, 1)" >A+{{j}}</span>
+<span class="notaPianoW" id={{nota+11}} onclick="playNote(this); addNote(this,event, 1)" >B{{j}}</span>
 {% endfor %}
 </span>
 

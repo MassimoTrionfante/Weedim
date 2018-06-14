@@ -30,9 +30,8 @@ document.oncontextmenu = function() { return false; } // Disable right-click men
 var music = [0]; // here we store all the notes of the music
 var lengths = [0,0]; // here we store all the lengths (used as delay in MIDI.noteOn)
                      // Note that an extra value is needed for Midi.js to playback properly
-var numOfNotes = 0; // how many notes out channel has
+var numOfNotes = 0; // how many notes our channel has
 var whereNextNote = 32; // where to place next note horizontally
-var lastAddedLength = 0; // used for chording, remembers last length (graphically)
 var isRec = 0; // Tells if it's in rec. mode
 
 // Play note at the click of the piano notes on the side
@@ -44,7 +43,7 @@ function playNote(elemento)
 }
 
 // Function that adds a note on the notes sheet by pressing the piano buttons
-function addNote(nota, event)
+function addNote(nota, event, isOnPiano)
 {
   if(isRec){
 
@@ -61,8 +60,20 @@ function addNote(nota, event)
     else
     {
       nuovaNota.className = "nota";
-      nuovaNota.style.top = nota.offsetTop  + "px";
-      nuovaNota.innerHTML = nota.innerHTML;
+      if (!isOnPiano)
+      {
+        nuovaNota.style.top = nota.offsetTop  + "px";
+      }
+      else
+      {
+        var riga = document.getElementById(nota.id);
+        nuovaNota.style.top = riga.offsetTop + "px";
+      }
+
+      if (noteLength != 32)
+      {
+        nuovaNota.innerHTML = nota.innerHTML;
+      }
     }
     nuovaNota.id = nota.id;
     nuovaNota.name = noteLength;
@@ -95,6 +106,11 @@ function addNote(nota, event)
       nuovaNota.style.width = 22 + "px";
       whereNextNote += 22 + 8;
     }
+    else if (noteLength == 32)
+    {
+      nuovaNota.style.width = 9 + "px";
+      whereNextNote += 7 + 8;
+    }
 
     // Finally, append new note in body
     noteSheet.appendChild(nuovaNota);
@@ -113,7 +129,7 @@ function changeLength(elem)
 {
   var miaLength = document.getElementById("noteLength");
 
-  if (elem.id == 1 && miaLength.innerHTML != 16) // shorten note
+  if (elem.id == 1 && miaLength.innerHTML != 32) // shorten note
   {
     miaLength.innerHTML = miaLength.innerHTML * 2;
   }
@@ -141,35 +157,42 @@ function playMusic()
 // Function that does the UNDO, aka, remove last inputted note
 function doUndo()
 {
-  music.pop();  // Pop a note, a length and decrease
-  numOfNotes--;  // notes number
-  lengths.pop();  //
-  var notaDaCanc = document.getElementById("corpoPrincipale").lastElementChild;
-  var noteLength = notaDaCanc.name;  
+  if (numOfNotes>0)
+  {
+    music.pop();  // Pop a note, a length and decrease
+    numOfNotes--;  // notes number
+    lengths.pop();  //
+    var notaDaCanc = document.getElementById("corpoPrincipale").lastElementChild;
+    var noteLength = notaDaCanc.name;  
  
-  // Calculate next position of new inserted note 
-  if (noteLength == 1)
-  {
-    whereNextNote -= 472 + 8;
+    // Calculate next position of new inserted note 
+    if (noteLength == 1)
+    {
+      whereNextNote -= 472 + 8;
+    }
+    else if (noteLength == 2)
+    {
+      whereNextNote -= 232 + 8;
+    }
+    else if (noteLength == 4)
+    {
+      whereNextNote -= 112 + 8;
+    }
+    else if (noteLength == 8)
+    {
+      whereNextNote -= 52 + 8;
+    }
+    else if (noteLength == 16)
+    {
+      whereNextNote -= 22 + 8;
+    }
+    else if (noteLength == 32)
+    {
+      whereNextNote -= 7 + 8;
+    }
+    // Nuke last note's gfx
+    notaDaCanc.remove();
   }
-  else if (noteLength == 2)
-  {
-    whereNextNote -= 232 + 8;
-  }
-  else if (noteLength == 4)
-  {
-    whereNextNote -= 112 + 8;
-  }
-  else if (noteLength == 8)
-  {
-    whereNextNote -= 52 + 8;
-  }
-  else if (noteLength == 16)
-  {
-    whereNextNote -= 22 + 8;
-  }
-  // Nuke last note's gfx
-  notaDaCanc.remove();
 }
 
 // Function that toggles REC. value
@@ -187,10 +210,35 @@ function toggleRec(elem)
   }
 }
 
+// Function that removes everything the user wrote
+function nuclearNuke()
+{
+  if (numOfNotes==0)
+  {
+    alert("You didn't input any note!");
+  }
+  else
+  {
+    var doubleCheck = confirm("Are you sure you want to delete ALL the notes you inputted?");
+    if (doubleCheck==true)
+    {
+      while (numOfNotes!=0) //Nuke all notes visually
+      {
+        var notaDaCanc = document.getElementById("corpoPrincipale").lastElementChild;
+        notaDaCanc.remove();
+        numOfNotes--;
+      }  
+      music = [0];       // Restore all global values as they were on startup
+      lengths = [0,0];
+      whereNextNote = 32; 
+    }
+  }
+}
+
 // Function that explains how site works shortly
 function showHelp()
 {
-  alert("Welcome to Weedim, your trusted Web Midi Maker!\n\nUse the piano on your left to play notes.\nYou can record a sequence by pressing on the \"Rec\" circle. Pressing it will toggle between a free mode, and the recording mode.\nOnce you recorded something, you can play the result by clicking the \"Play\" button.\nPress on the red minus circle or on the green plus circle to change the recorded notes length: lengths vary from 16th (the shortest) to 1th (the longest).\nIf you need to record a pause between notes, simply click on the \"Add rest\" box.\nLastly, you can remove the last recorded note or rest by clicking on the red \"Undo\" arrow.\n\nEnjoy your time!\n- Massimo Trionfante ");
+  alert("Welcome to Weedim, your trusted Web Midi Maker!\n\nUse either the piano on the bottom of the screen or the note buttons inside the piano roll to play notes.\nYou can record a sequence by pressing on the \"Rec\" circle. Pressing it will toggle between a free mode, and the recording mode.\nOnce you recorded something, you can play the result by clicking the \"Play\" button.\nPress on the red minus circle or on the green plus circle to change the recorded notes length: lengths vary from 32th (the shortest) to 1th (the longest).\nIf you need to record a pause between notes, simply click on the \"Add rest\" box.\nLastly, you can remove the last recorded note or rest by clicking on the red \"Undo\" arrow; although, if you want to delete everything at once, no need to refresh the window: simply click on the bin icon, and click OK on the dialogue box.\n\nThe layout was designed for 1920x1080 screens; it may look buggy on smaller resolutions.\n\nEnjoy your time!\n- Massimo Trionfante ");
 
 }
 

@@ -1,5 +1,27 @@
 @keyframes spin
-{ 100% {-webkit-transform: rotate(360deg); transform:rotate(360deg);} }
+{
+0% { color: #000020 }
+50% { color: #DFDFFF }
+100% {
+       color: #000020;
+       -webkit-transform: rotate(360deg);
+       transform:rotate(360deg);
+     }
+}
+
+@keyframes loading
+{
+  0%  { color: #000020 }
+  50% { color: #DFDFFF }
+  100% { color: #000020 }
+}
+
+@keyframes longload
+{
+  0% { color: #000000 }
+  98% { color: #000000 }
+  100% { color: #FF0000 }
+}
 
 #loading {
 display: table;
@@ -10,16 +32,24 @@ top: 200px;
 }
 
 .loadingwrite {
-position: absolute;
-left:0;
+position: static;
 font-size: 100px;
-display: inline-block;
+display: block;
+margin: auto;
+-webkit-animation: loading 2s linear infinite;
+}
+
+.loadinglong {
+font-size: 30px;
+color: #FF0000;
+-webkit-animation: longload 14s linear;
 }
 
 .loadingScreen {
+cursor: wait;
 text-align: center;
 opacity: 0.5;
-z-index: 99;
+z-index: 101;
 background-color: black;
 position: fixed;
 left:0; right:0; top:0; bottom:0;
@@ -154,13 +184,15 @@ position: absolute;
 background-color: #050530;
 width: 1080px;
 height: 400px;
+max-width: 99%;
+max-height: 67%;
 overflow: auto;
 resize: both;
 }
 
 .lineaNota {
 border-bottom: 1px solid #303070;
-width: 99999px;
+width: 39000px;
 display: block;
 height: 30px;
 position: static;
@@ -176,18 +208,19 @@ width: 30px;
 position: absolute;
 display: block;
 height: 9999px;
-max-height: 2620px;
+max-height: 2244px;
 overflow: hidden;
 border-right: 1px solid #303070;
 }
 
 .separatoreOttave {
 border: 1px solid #303070;
-width: 99999px;
+width: 39000px;
 display: block;
 }
 
 .notaCorpoPrincipaleW {
+cursor: pointer;
 z-index: 4;
 vertical-align: middle;
 position: relative;
@@ -201,6 +234,7 @@ height: 30px;
 }
 
 .notaCorpoPrincipaleB {
+cursor: pointer;
 z-index: 4;
 vertical-align: middle;
 position: relative;
@@ -211,6 +245,64 @@ color: #A0A0FF;
 text-align: center;
 width: 30px;
 height: 30px;
+}
+
+.pianoBox {
+z-index: 100;
+position: absolute;
+overflow-x: scroll;
+bottom: 0px;
+background-color: #202070;
+background-image: url("img/tile1.png");
+border-top: 4px solid #202070;
+border-right: 4px solid #202070;
+border-bottom: 4px solid #9090FF;
+border-left: 4px solid #9090FF;
+border-radius: 10px;
+display:block;
+min-width: 50px;
+max-width: 98%;
+height: 120px;
+padding: 5px 5px;
+resize: horizontal;
+}
+
+.notaPianoW {
+cursor: pointer;
+text-align: center;
+vertical-align: middle;
+position: relative;
+display: table-cell;
+min-height: 100px;
+min-width: 50px;
+border: 1px solid #404090;
+border-radius: 5px;
+background: linear-gradient(to bottom, #FFFFFF, #A0A0FF);
+text-shadow: 1px 0 #000000, 0 1px #000000, -1px 0 #000000, 0 -1px #000000;
+color: #FFFFFF;
+}
+
+.notaPianoW:hover {
+background: linear-gradient(to bottom, #DFDFDF, #8080DF);
+}
+
+.notaPianoB {
+cursor: pointer;
+text-align: center;
+vertical-align: middle;
+position: relative;
+display: table-cell;
+height: 100px;
+min-width: 50px;
+border: 1px solid #A0A0F0;
+border-radius: 5px;
+background: linear-gradient(to bottom, #000020, #404070);
+text-shadow: 1px 0 #FFFFFF, 0 1px #FFFFFF, -1px 0 #FFFFFF, 0 -1px #FFFFFF;
+color: #000000;
+}
+
+.notaPianoB:hover {
+background: linear-gradient(to bottom, #303050, #7070A0);
 }
 
 .rigaBarraLaterale {
@@ -266,7 +358,7 @@ text-shadow: 1px 0 #202020, 0 1px #202020, -1px 0 #202020, 0 -1px #202020;
 
 .nota {
 font-size: 13px;
-cursor: move;
+cursor: pointer;
 z-index: 3;
 padding: 2px 2px;
 display: block;
@@ -287,12 +379,12 @@ text-shadow: 1px 0 #000000, 0 1px #000000, -1px 0 #000000, 0 -1px #000000;
 .rest {
 font-size: 10px;
 opacity: 0.5;
-cursor: move;
+cursor: pointer;
 z-index: 3;
 padding: 2px 2px;
 display: block;
 position: absolute;
-height: 2615px;
+height: 2239px;
 width: 112px;
 text-align: center;
 background-color: #FF80A0;
