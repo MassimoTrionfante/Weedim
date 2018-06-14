@@ -38,7 +38,7 @@
 <br>
 <b>Author:</b> Massimo Trionfante<br>
 <b>Mail:</b> massimo.trionfante@gmail.com<br>
-<b>Github:</b> <a href="https://github.com/MassimoTrionfante">https://github.com/MassimoTrionfante</a><br>
+<b>Github:</b> <a href="https://github.com/MassimoTrionfante/Weedim">https://github.com/MassimoTrionfante/Weedim</a><br>
 </span>
 </span>
 
@@ -70,20 +70,9 @@
 
 <!-- CORPO PRINCIPALE, dove puoi piazzare le note -->
 <span id="corpoPrincipale" class="corpoPrincipale">
-<!-- Appendi le note qui! -->
-<!--<span class="nota"
-onmousemove="moveNote(this,event)"
-onmousedown="setMouseDown(this,event)"
-onmouseup="setMouseUp()">C7</span>
--->
-<!--
-NOTE LENGTHS->WIDTH INFO!! 
-4    = 113px
-8^16 = 83px
-8    = 53px
-16   = 23px // EACH SQUARE IS A 16th OF NOTE!
--->
+<!-- Here is where new notes append -->
 
+<!-- Build vertical lines. Each square is a 16th note -->
 {% set i = 1 %}
 {% for i in range(1,1300) %}
 {% set j = i*30 %}
@@ -93,13 +82,14 @@ NOTE LENGTHS->WIDTH INFO!!
 {% endif %}
 {% endfor %}
 
+
+<!-- build the piano on the left of the roll, plus, add horizontal lines. Process iterates for each octave -->
 {% set j = 0 %}
 {% set nota = 12 %}
 {% for j in range(0,6) %}
-  {% set i = 7-j %}
-  {% set nota = 12*i %}
+{% set i = 7-j %}
+{% set nota = 12*i %}
 <span class="separatoreOttave"></span>
-
 <span class="lineaNota"><span id={{nota+11}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">B{{i-1}}</span></span>
 <span class="lineaNota"><span id={{nota+10}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleB">A+{{i-1}}</span></span>
 <span class="lineaNota"><span id={{nota+9}} onclick="playNote(this); addNote(this, event, 0)" class="notaCorpoPrincipaleW">A{{i-1}}</span></span>
@@ -117,11 +107,11 @@ NOTE LENGTHS->WIDTH INFO!!
 
 <!-- Horizontal piano goes here  -->
 <span class="pianoBox">
-
+<!-- Build every octave  -->
 {% set j = 0 %}
 {% set nota = 12 %}
 {% for j in range(1,7) %}
-  {% set nota = 12*(j+1) %}
+{% set nota = 12*(j+1) %}
 <span class="notaPianoW" id={{nota}} onclick="playNote(this); addNote(this,event, 1)" >C{{j}}</span>
 <span class="notaPianoB" id={{nota+1}} onclick="playNote(this); addNote(this,event, 1)" >C+{{j}}</span>
 <span class="notaPianoW" id={{nota+2}} onclick="playNote(this); addNote(this,event, 1)" >D{{j}}</span>
