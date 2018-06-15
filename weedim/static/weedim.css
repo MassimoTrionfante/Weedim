@@ -185,7 +185,7 @@ background-color: #050530;
 width: 1080px;
 height: 400px;
 max-width: 99%;
-max-height: 67%;
+max-height: 65%;
 overflow: auto;
 resize: both;
 }
@@ -260,6 +260,7 @@ border-bottom: 4px solid #9090FF;
 border-left: 4px solid #9090FF;
 border-radius: 10px;
 display:block;
+width: 80%;
 min-width: 50px;
 max-width: 98%;
 height: 120px;

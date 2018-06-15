@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, g
+from flask import Flask, render_template, send_from_directory
 
 def create_app(test_config=None):
     # create and configure the app
@@ -21,6 +21,10 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    @app.route('/favicon.ico')
+    def favicon():
+        return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
     @app.route('/')
     def mainPage():

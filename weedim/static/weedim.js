@@ -52,85 +52,91 @@ function playNote(elemento)
 function addNote(nota, event, isOnPiano)
 {
   if(isRec){ // Go trough this only if REC. mode is enabled
-
-    var noteSheet = document.getElementById("corpoPrincipale"); // Get the piano roll
-    var nuovaNota = document.createElement("span");  // Create a new note element
-    var noteLength = document.getElementById("noteLength").innerHTML; // Get the length from the span that contains the numerical length of note
-
-    // Show the note graphically
-    if (nota.id==0) // ID = 0 -> User pressed the red box that adds a rest, rather than a note...
+    if (whereNextNote>38500)
     {
-      nuovaNota.className = "rest";
-      nuovaNota.style.top = 0;      // ....so yeah, add the note, put it vertically on top, so that it covers all the piano roll
+      alert("You exceeded the max size of the piano roll. Delete some note to add a new one.");
     }
-    else // If it wasn't a rest, then add a true note!
+    else
     {
-      nuovaNota.className = "nota";
-      if (!isOnPiano) // Place the note on the piano roll, but behave differently, depending on where user clicked the note from
+      var noteSheet = document.getElementById("corpoPrincipale"); // Get the piano roll
+      var nuovaNota = document.createElement("span");  // Create a new note element
+      var noteLength = document.getElementById("noteLength").innerHTML; // Get the length from the span that contains the numerical length of note
+
+      // Show the note graphically
+      if (nota.id==0) // ID = 0 -> User pressed the red box that adds a rest, rather than a note...
       {
-        nuovaNota.style.top = nota.offsetTop  + "px"; // This is the .top value of new note, if user clicked on the piano roll note...
+        nuovaNota.className = "rest";
+        nuovaNota.style.top = 0;      // ....so yeah, add the note, put it vertically on top, so that it covers all the piano roll
       }
-      else
+      else // If it wasn't a rest, then add a true note!
       {
-        var riga = document.getElementById(nota.id);
-        nuovaNota.style.top = riga.offsetTop + "px";  // ...while this is the .top value if user clicks on the horizontal piano.
-      }
+        nuovaNota.className = "nota";
+        if (!isOnPiano) // Place the note on the piano roll, but behave differently, depending on where user clicked the note from
+        {
+          nuovaNota.style.top = nota.offsetTop  + "px"; // This is the .top value of new note, if user clicked on the piano roll note...
+        }
+        else
+        {
+          var riga = document.getElementById(nota.id);
+          nuovaNota.style.top = riga.offsetTop + "px";  // ...while this is the .top value if user clicks on the horizontal piano.
+        }
 
-      if (noteLength != 32) // Since 32th notes are tiny, I have no room to add text inside them...
+        if (noteLength != 32) // Since 32th notes are tiny, I have no room to add text inside them...
+        {
+          nuovaNota.innerHTML = nota.innerHTML; // ...so, write note's value and octave IF it's not a 32th.
+        }
+      }
+      nuovaNota.id = nota.id; // Set ID of new note (we said that ID of notes contain the value of the note they play)
+      nuovaNota.name = noteLength; // Put the length in the note's name
+      nuovaNota.setAttribute("onclick","javascript: playNote(this)"); // Every inputted note on the piano roll can be played if touched
+      nuovaNota.style.left = whereNextNote + "px";  // Place the new note horizontally
+
+      // Now... fun begins: set the width of the note depending on its length.
+      // I really tried making this in a for cycle rather than having this dumb chain of ifs, but visually, notes always looked off.
+      // So yeah, tl;dr: give a fixed width depending on note length...
+      if (noteLength == 1)
       {
-        nuovaNota.innerHTML = nota.innerHTML; // ...so, write note's value and octave IF it's not a 32th.
+        nuovaNota.style.width = 472 + "px";
+        whereNextNote += 472 + 8 ;
       }
-    }
-    nuovaNota.id = nota.id; // Set ID of new note (we said that ID of notes contain the value of the note they play)
-    nuovaNota.name = noteLength; // Put the length in the note's name
-    nuovaNota.setAttribute("onclick","javascript: playNote(this)"); // Every inputted note on the piano roll can be played if touched
-    nuovaNota.style.left = whereNextNote + "px";  // Place the new note horizontally
+      else if (noteLength == 2)
+      {
+        nuovaNota.style.width = 232 + "px";
+        whereNextNote += 232 + 8;
+      }
+      else if (noteLength == 4)
+      {
+        nuovaNota.style.width = 112 + "px";
+        whereNextNote += 112 + 8;
+      }
+      else if (noteLength == 8)
+      {
+        nuovaNota.style.width = 52 + "px";
+        whereNextNote += 52 + 8;
+      }
+      else if (noteLength == 16)
+      {
+        nuovaNota.style.width = 22 + "px";
+        whereNextNote += 22 + 8;
+      }
+      else if (noteLength == 32)
+      {
+        nuovaNota.style.width = 9 + "px";
+        whereNextNote += 7 + 8;
+      }
+      // ...till here.
 
-    // Now... fun begins: set the width of the note depending on its length.
-    // I really tried making this in a for cycle rather than having this dumb chain of ifs, but visually, notes always looked off.
-    // So yeah, tl;dr: give a fixed width depending on note length...
-    if (noteLength == 1)
-    {
-      nuovaNota.style.width = 472 + "px";
-      whereNextNote += 472 + 8 ;
-    }
-    else if (noteLength == 2)
-    {
-      nuovaNota.style.width = 232 + "px";
-      whereNextNote += 232 + 8;
-    }
-    else if (noteLength == 4)
-    {
-      nuovaNota.style.width = 112 + "px";
-      whereNextNote += 112 + 8;
-    }
-    else if (noteLength == 8)
-    {
-      nuovaNota.style.width = 52 + "px";
-      whereNextNote += 52 + 8;
-    }
-    else if (noteLength == 16)
-    {
-      nuovaNota.style.width = 22 + "px";
-      whereNextNote += 22 + 8;
-    }
-    else if (noteLength == 32)
-    {
-      nuovaNota.style.width = 9 + "px";
-      whereNextNote += 7 + 8;
-    }
-    // ...till here.
+      // Finally, append new note in body
+      noteSheet.appendChild(nuovaNota);
 
-    // Finally, append new note in body
-    noteSheet.appendChild(nuovaNota);
-
-    // Put the music values in our global arrays
-    music.push(nota.id); // Push the note value
-    lengths.push(32/noteLength); // Push the length. Mind the 32/x: thanks to this, we can smartly revert big numbers as short lengths.
+      // Put the music values in our global arrays
+      music.push(nota.id); // Push the note value
+      lengths.push(32/noteLength); // Push the length. Mind the 32/x: thanks to this, we can smartly revert big numbers as short lengths.
                                  // For example, 32/16th -> 2, this means 16th notes have a length in seconds of 2....
                                  // ... 32/1th -> 32, aka 1th note has a length of 32.
                                  // If we don't do this division, a 16th would last more than a 1th, and this isn't true!
-    numOfNotes++; // Increase note counter
+      numOfNotes++; // Increase note counter
+    }
   }
 }
 
