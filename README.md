@@ -11,7 +11,7 @@ If you are interested, link of his repo here: https://github.com/mudcube/MIDI.js
 
 # How to run Weedim on your device
 
-Clone the whole repository in your local folder, and, after installing Flask (you can simply do "pip install requirements.txt"), execute the batch "go.sh".
+Clone the whole repository in your local folder, and, after installing Flask, execute the batch "go.sh".
 Said bash will set the FLASK_APP's name and the FLASK_ENV to "development", and it'll run, by default, on
-your localhost address, port 5000.
+your localhost address, port 5000 (you could eventually set them manually if you wish).
 Once it's running, visit http://localhost:5000 or http://0.0.0.0:5000 from your device to access to it.
