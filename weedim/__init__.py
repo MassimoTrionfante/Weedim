@@ -51,7 +51,7 @@ def create_app(test_config=None):
             else:
               #Collect the JSONs
               g.notes = json.loads(mioDoc["notes"]) # We can access to each elem of the array with a for cycle (for elem in g.notes: print(elem) )
-              g.notes = json.loads(mioDoc["delays"])
+              g.delays = json.loads(mioDoc["delays"])
               
         return render_template('weedim.html')
 

@@ -52,7 +52,7 @@
 <span class="elemMT" onclick="showHelp()">Help</span>
 SESSION NUMBER:
 <form method="POST" style="display:inline">
-<input name="sessionNumber" type="text" style="width:100px"></input>
+<input name="sessionNumber" type="text" style="width:100px" required></input>
 <input type="submit" value="Load Sheet"</input>
 {% for message in get_flashed_messages() %}
 <span class="flash" style="color:#FF0000">{{ message }}</span>
@@ -83,11 +83,19 @@ SESSION NUMBER:
 var music = [0];
 var lengths = [0,0];
 var isRec = 1;
+var numOfNotes = 0;
 
-{% set i = 0 %}
 {% for elem in g.notes %}
-addNote(60,0,1);
+music.push({{elem}});
+numOfNotes++;
 {% endfor %}
+
+{% for elem in g.delays %}
+lengths.push({{elem}});
+{% endfor %}
+
+addNoteVirtualPiano();
+
 </script>
 
 
@@ -148,4 +156,3 @@ addNote(60,0,1);
 
 </body>
 </html>
-

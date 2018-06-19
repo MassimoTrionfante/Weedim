@@ -33,7 +33,7 @@ document.oncontextmenu = function() { return false; } // Disable right-click men
 //var music = [0]; // Here we store all the notes of the recorded music
 //var lengths = [0,0]; // Here we store all the lengths (used as delay in MIDI.noteOn)
                      // Note that an extra value is needed for Midi.js to playback properly
-var numOfNotes = 0; // Counter that says how many notes our channel has
+//var numOfNotes = 0; // Counter that says how many notes our channel has
 var whereNextNote = 32; // Variable used for GFX, it says where to place next note horizontally
 //var isRec = 0; // Toggle that tells if interface is in rec. mode
 
@@ -137,6 +137,71 @@ function addNote(nota, event, isOnPiano)
                                  // If we don't do this division, a 16th would last more than a 1th, and this isn't true!
       numOfNotes++; // Increase note counter
     }
+  }
+}
+
+// Function that adds notes that come from Weedim Virtual Piano. Variables are already stored in the global arrays
+function addNoteVirtualPiano()
+{
+  var noteSheet = document.getElementById("corpoPrincipale"); // Get the piano roll
+  var i = 0;
+  var note;   // Set some variables we need for the looping part
+  var length;
+  while (i < music.length) // Keep going till we insert everything
+  {
+    note = music[i];
+    length = lengths[i+1];
+    
+    var nuovaNota = document.createElement("span");
+    if (note == 0)
+    {
+      nuovaNota.className = "rest";
+      nuovaNota.style.top = 0;
+    }
+    else
+    {
+      nuovaNota.className = "nota";
+      var riga = document.getElementById(note);
+      nuovaNota.style.top = riga.offsetTop + "px";
+      nuovaNota.id = note; // Set ID of new note (we said that ID of notes contain the value of the note they play)
+      nuovaNota.name = length; // Put the length in the note's name
+      nuovaNota.setAttribute("onclick","javascript: playNote(this)"); // Every inputted note on the piano roll can be played if touched
+      nuovaNota.style.left = whereNextNote + "px";  // Place the new note horizontally
+      if (length == 1)
+      {
+        nuovaNota.style.width = 472 + "px";
+        whereNextNote += 472 + 8 ;
+      }
+      else if (length == 2)
+      {
+        nuovaNota.style.width = 232 + "px";
+        whereNextNote += 232 + 8;
+      }
+      else if (length == 4)
+      {
+        nuovaNota.style.width = 112 + "px";
+        whereNextNote += 112 + 8;
+      }
+      else if (length == 8)
+      {
+        nuovaNota.style.width = 52 + "px";
+        whereNextNote += 52 + 8;
+      }
+      else if (length == 16)
+      {
+        nuovaNota.style.width = 22 + "px";
+        whereNextNote += 22 + 8;
+      }
+      else if (length == 32)
+      {
+        nuovaNota.style.width = 9 + "px";
+        whereNextNote += 7 + 8;
+      }
+     noteSheet.appendChild(nuovaNota);     
+ 
+    }
+    numOfNotes++;
+    i++;
   }
 }
 
@@ -265,11 +330,9 @@ function showHelp()
 // Unused function that enabled midi exporting. I abandoned the idea after facing too many issues, and exam date was coming quickly..
 /*
 function getMidi(){
-
   var arrasdi = [0x50,0x43,0x22]; // Generic array that had hex values
   var mioFile = document.createElement('a'); // This is a nice trick: add an <a>, click on it via javascript, and then nuke.
                                              // Best way to download files in pure Javascript, lol.
-
   mioFile.setAttribute('href', 'data:audio/mid;charset=utf-8,' + String.fromCharCode(arrasdi[0])); //String.fromCharCode writes a litteral hex
                                                                                                    //value in the file. Sadly, I have no idea
                                                                                                    //how I should iterate this to accept an
