@@ -71,7 +71,7 @@ SESSION NUMBER:
 <span class="elemMI">Play <span class="fa fa-play" style="color:#80F0A0; cursor:pointer" onclick="playMusic()"></span> </span>
 <span class="elemMI">Undo <span class="fa fa-undo" style="color:#F080A0; cursor:pointer" onclick="doUndo()"></span> </span>
 <span class="elemMI">Add rest <span id=0 class="fa fa-cube" style="color:#F080A0;cursor:pointer" onclick="addNote(this,event)"></span> </span>
-<span class="elemMI">REC. <span class="fa fa-dot-circle-o" style="cursor:pointer;color:#4040A0" onclick="toggleRec(this)"> </span> </span>
+<span class="elemMI">REC. <span class="fa fa-dot-circle-o" style="cursor:pointer;color:#F04080" onclick="toggleRec(this)"> </span> </span>
 <span class="elemMI">Delete <span class="fa fa-trash" style="color:#F080A0;cursor:pointer" onclick="nuclearNuke()"></span>  </span>
 </span>
 
@@ -79,6 +79,17 @@ SESSION NUMBER:
 <!-- CORPO PRINCIPALE, dove puoi piazzare le note -->
 <span id="corpoPrincipale" class="corpoPrincipale">
 <!-- Here is where new notes append -->
+<script>
+var music = [0];
+var lengths = [0,0];
+var isRec = 1;
+
+{% set i = 0 %}
+{% for elem in g.notes %}
+addNote(60,0,1);
+{% endfor %}
+</script>
+
 
 <!-- Build vertical lines. Each square is a 16th note -->
 {% set i = 1 %}

@@ -30,12 +30,12 @@ document.oncontextmenu = function() { return false; } // Disable right-click men
 
 // GLOBAL VARIABLES -------------------------------------------
 
-var music = [0]; // Here we store all the notes of the recorded music
-var lengths = [0,0]; // Here we store all the lengths (used as delay in MIDI.noteOn)
+//var music = [0]; // Here we store all the notes of the recorded music
+//var lengths = [0,0]; // Here we store all the lengths (used as delay in MIDI.noteOn)
                      // Note that an extra value is needed for Midi.js to playback properly
 var numOfNotes = 0; // Counter that says how many notes our channel has
 var whereNextNote = 32; // Variable used for GFX, it says where to place next note horizontally
-var isRec = 0; // Toggle that tells if interface is in rec. mode
+//var isRec = 0; // Toggle that tells if interface is in rec. mode
 
 
 // FUNCTIONS COMING BELOW! ----------------------------------
