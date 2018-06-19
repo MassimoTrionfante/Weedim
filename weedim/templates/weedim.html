@@ -50,6 +50,14 @@
 <span class="menuTendina">
 <!-- ...e i vari elementi interni -->
 <span class="elemMT" onclick="showHelp()">Help</span>
+SESSION NUMBER:
+<form method="POST" style="display:inline">
+<input name="sessionNumber" type="text" style="width:100px"></input>
+<input type="submit" value="Load Sheet"</input>
+{% for message in get_flashed_messages() %}
+<span class="flash" style="color:#FF0000">{{ message }}</span>
+{% endfor %}
+</form>
 </span>
 
 <!-- Menu' con info del progetto -->
