@@ -84,7 +84,9 @@ var music = [0];
 var lengths = [0,0];
 var isRec = 1;
 var numOfNotes = 0;
+var whereNextNote = 32;
 
+{% set i = 0 %}
 {% for elem in g.notes %}
 music.push({{elem}});
 numOfNotes++;
@@ -93,8 +95,6 @@ numOfNotes++;
 {% for elem in g.delays %}
 lengths.push({{elem}});
 {% endfor %}
-
-addNoteVirtualPiano();
 
 </script>
 

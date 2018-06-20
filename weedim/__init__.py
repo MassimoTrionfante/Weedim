@@ -66,5 +66,10 @@ def create_app(test_config=None):
       db.weedim.insert({"sesnum":sessionNum,"notes":notes,"delays":delays})
       return str(sessionNum) # Return the session number for our android app to use
 
+    # This service is used to check if server can be reached from phone app
+    @app.route('/check',methods=["POST"])
+    def checkService():
+      return "42"
+
     return app
 
