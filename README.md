@@ -1,5 +1,4 @@
 # Weedim, your trusted web midi maker
-
 This small web service was designed as project for an exam.
 Its aim is to give to users the ability to create simple mono-channel midis, with an user interface that was aimed to be as
 simple as possible.
@@ -10,8 +9,11 @@ The website uses some of the MIDI.js source code from mudcube. Many thanks to hi
 If you are interested, link of his repo here: https://github.com/mudcube/MIDI.js/
 
 # How to run Weedim on your device
-
 Clone the whole repository in your local folder, and, after installing Flask, execute the batch "go.sh".
 Said bash will set the FLASK_APP's name and the FLASK_ENV to "development", and it'll run, by default, on
 your localhost address, port 5000 (you could eventually set them manually if you wish).
 Once it's running, visit http://localhost:5000 or http://0.0.0.0:5000 from your device to access to it.
+
+# Known Bugs
+- If you happen to start a session from a tape recorded by Weedim Virtual Piano, some functionalities could randomly stop working. Make sure you let Weedim load, even after it finished loading the soundfont samples.
+- You are unable to erase the "transparent" notes and rests parsed by Weedim Virtual Piano. Your records will always start from the last note inputted from the Virtual Piano's recorded session.
