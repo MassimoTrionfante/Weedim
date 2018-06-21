@@ -43,14 +43,14 @@ def create_app(test_config=None):
         if request.method=="POST":
             error = None
             db = get_db()
-            inputtedSesNum = request.form['sessionNumber']
-            mioDoc = db.weedim.find_one({'sesnum':inputtedSesNum}) #...check if it exists in the database
+            inputtedSesNum = int(request.form['sessionNumber'])
+            mioDoc = db.weedim.find_one({'sesnum':int(inputtedSesNum)}) #...check if it exists in the database
             if mioDoc is None:
               error = "Session not found!"
               flash(error)
             else:
               #Collect the JSONs
-              g.notes = json.loads(mioDoc["notes"]) # We can access to each elem of the array with a for cycle (for elem in g.notes: print(elem) )
+              g.notes = json.loads(mioDoc["notes"]) #Put JSONs in global object g
               g.delays = json.loads(mioDoc["delays"])      
         return render_template('weedim.html')
 

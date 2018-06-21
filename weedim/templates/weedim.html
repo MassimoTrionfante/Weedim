@@ -53,7 +53,7 @@
 <span class="elemMT" onclick="showHelp()">Help</span>
 SESSION NUMBER:
 <form method="POST" style="display:inline">
-<input name="sessionNumber" type="text" style="width:100px" required></input>
+<input name="sessionNumber" type="number" style="width:100px" required></input>
 <input type="submit" value="Load Sheet"</input>
 {% for message in get_flashed_messages() %}
 <span class="flash" style="color:#FF0000">{{ message }}</span>
