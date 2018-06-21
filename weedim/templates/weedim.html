@@ -81,59 +81,46 @@ SESSION NUMBER:
 <span id="corpoPrincipale" class="corpoPrincipale">
 <!-- Here is where new notes append -->
 <script>
+// Global variables are initialized here
 var music = [0];
 var lengths = [0,0];
 var isRec = 1;
 var numOfNotes = 0;
 var whereNextNote = 32;
 
+//Get the pianoroll
 var mioPianoRoll = document.getElementById("corpoPrincipale");
+var notaFresca; // New span to append
 
-{% for elem in g.delays %}
+{% for elem in g.delays %} // Start going trough all the notes
 lengths.push({{elem}});
 {% endfor %}
-
 {% set i = 0 %}
 {% for elem in g.notes %}
 music.push({{elem}});
-
-var notaFresca = document.createElement("span");
-
+notaFresca = document.createElement("span");
 {% if elem != 0 %}
 notaFresca.className = "nota";
 {% else %}
 notaFresca.className = "rest";
 {% endif %}
-
 notaFresca.style.offsetTop = 3 + "px";
-notaFresca.style.height = 2238 + "px"; // TODO arrayNoteBegin[numOfNotes]
+notaFresca.style.height = 2238 + "px";
 notaFresca.style.left = whereNextNote + "px";
-
-{% if elem == 0 %}
-     if (32/lengths[numOfNotes+2]==32){notaFresca.style.width=472 + "px"; whereNextNote+=472+8;}
-else if (32/lengths[numOfNotes+2]==16){notaFresca.style.width=232 + "px"; whereNextNote+=232+8;}
-else if (32/lengths[numOfNotes+2]==8){notaFresca.style.width=112 + "px"; whereNextNote+=112+8;}
-else if (32/lengths[numOfNotes+2]==4){notaFresca.style.width=52 + "px"; whereNextNote+=52+8;}
-else if (32/lengths[numOfNotes+2]==2){notaFresca.style.width=22 + "px"; whereNextNote+=22+8;}
-else if (32/lengths[numOfNotes+2]==1){notaFresca.style.width=7 + "px"; whereNextNote+=7+8;}
-{% else %}
      if (lengths[numOfNotes+2]==32){notaFresca.style.width=472 + "px"; whereNextNote+=472+8;}
 else if (lengths[numOfNotes+2]==16){notaFresca.style.width=232 + "px"; whereNextNote+=232+8;}
 else if (lengths[numOfNotes+2]==8){notaFresca.style.width=112 + "px"; whereNextNote+=112+8;}
 else if (lengths[numOfNotes+2]==4){notaFresca.style.width=52 + "px"; whereNextNote+=52+8;}
 else if (lengths[numOfNotes+2]==2){notaFresca.style.width=22 + "px"; whereNextNote+=22+8;}
 else if (lengths[numOfNotes+2]==1){notaFresca.style.width=7 + "px"; whereNextNote+=7+8;}
-{% endif %}
-
 notaFresca.id = {{elem}};
 notaFresca.setAttribute("name",lengths[numOfNotes+2].toString());
 notaFresca.setAttribute("onclick","javascript: playNote(this)");
 notaFresca.style.opacity=0.5;
 mioPianoRoll.appendChild(notaFresca);
-
 numOfNotes++;
 {% endfor %}
-
+numOfNotes=0;
 </script>
 
 

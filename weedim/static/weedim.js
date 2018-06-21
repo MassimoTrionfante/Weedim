@@ -26,7 +26,7 @@ MIDI.loadPlugin({
   });
 };
 
-document.oncontextmenu = function() { return false; } // Disable right-click menu
+//document.oncontextmenu = function() { return false; } // Disable right-click menu
 
 // GLOBAL VARIABLES -------------------------------------------
 // (note that these are now inside the HTML, due to some Jinja stuff added)
@@ -185,6 +185,11 @@ function doUndo()
     var notaDaCanc = document.getElementById("corpoPrincipale").lastElementChild; // Get the last child of the piano roll body...
     var noteLength = notaDaCanc.name; // ...though before removing it, we have to set the horizontal spawn value of next note.
  
+    if (notaDaCanc == null)
+    { notaDaCanc = music[numOfNotes]; }
+    if (noteLength == null)
+    { noteLength = lengths[numOfNotes]; }
+
     // Calculate next position of new inserted note. We'll subtract an amount of pixels depending on the length of the note we want to kill.
     // ...do I have to repeat again that I attempted to "for" all this?
     if (noteLength == 1)
@@ -244,14 +249,9 @@ function nuclearNuke()
     if (doubleCheck==true) // If user truly wants to nuke all the notes inputted so far...
     {
       while (numOfNotes!=0) // ...then nuke all notes visually
-      {
-        var notaDaCanc = document.getElementById("corpoPrincipale").lastElementChild; // Remove each single last child
-        notaDaCanc.remove();  // ..in here....
-        numOfNotes--;  // ...and decrease notes number.
-      }  
-      music = [0];       // Restore all global values as they were on startup
-      lengths = [0,0];
-      whereNextNote = 32; 
+      { 
+        doUndo();
+      }   
     }
   }
 }
